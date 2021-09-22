@@ -129,7 +129,7 @@ function nextPalindromeDate(date){
         }
         nextDate=getNextDate(nextDate);
     }
-    return [ nxt , nextDate];
+    return [ Number(nxt) , nextDate];
 }
 
 /*var date={
@@ -145,7 +145,7 @@ function getPreviousDate(date) {
     var month=date.month;
     var year=date.year;
     
-    var daysInMonth=[31,31,28,31,30,31,30,31,31,30,31,30,31];
+    var daysInMonths=[31,31,28,31,30,31,30,31,31,30,31,30,31];
     
     if(month===3){  
         if(isLeapYear(year)){
@@ -157,9 +157,9 @@ function getPreviousDate(date) {
     }
     }
     else{
-        if(day<29){
-             day=28;
-            
+        if(day<1){
+             month--;
+             day=daysInMonths[month];
         }
     }
     
@@ -168,7 +168,7 @@ function getPreviousDate(date) {
         else{
             if(day<1){
                 month--;
-                day=daysInMonth[month];
+                day=daysInMonths[month];
                 
             }
         }
@@ -190,16 +190,19 @@ function previousPalindromeDate(date){
     var previousDate=getPreviousDate(date);
     while(1){
         pre++;
+        
         var ispalindrome=checkPalindrome(previousDate);
         if(ispalindrome){
             break;
         }
         previousDate=getPreviousDate(previousDate);
+        
     }
-    return [ pre , previousDate];
+    return [ Number(pre) , previousDate];
 }
 
-//console.log(getPreviousDate(date))
+
+//console.log(previousPalindromeDate(date))
 
 
 
@@ -219,16 +222,16 @@ checkButton.addEventListener('click', function eventHandler(){
        }
        else
        {
-           if(nxt<pre){
-   var[ nxt , nextDate]= nextPalindromeDate(date);
-   console.log()
-   outputMessage.innerText=`The next Palindrome Date is ${nextDate.day}-${nextDate.month}-${nextDate.year},You missed the Date by ${nxt} days.`;
-} else {
-    var[ pre , previousDate]= previousPalindromeDate(date);
-    console.log()
-    outputMessage.innerText=`The Last Palindrome Date was ${previousDate.day}-${previousDate.month}-${previousDate.year},You missed the Date by ${pre} days.`;
+          if(nxt<pre){
+        var[ nxt , nextDate]= nextPalindromeDate(date);
+        
+        outputMessage.innerText=`The next Palindrome Date is ${nextDate.day}-${nextDate.month}-${nextDate.year},You missed the Date by ${nxt} days.`;
+         } else {
+   var[ pre , previousDate]= previousPalindromeDate(date);
+    
+   outputMessage.innerText=`The Last Palindrome Date was ${previousDate.day}-${previousDate.month}-${previousDate.year},You missed the Date by ${pre} days.`;
 
-}
+          }
        }
        
     }
