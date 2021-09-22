@@ -1,4 +1,4 @@
- const inputDate=document.querySelector('#date-input');
+const inputDate=document.querySelector('#date-input');
  const checkButton=document.querySelector('#check-btn');
  const outputMessage=document.querySelector('#output-msg');
 
@@ -132,11 +132,11 @@ function nextPalindromeDate(date){
     return [ nxt , nextDate];
 }
 
-var date={
-    day:1 ,
+/*var date={
+    day:1,
         month:1 ,
         year:2021
-}
+}*/
 function getPreviousDate(date) {
 
     
@@ -145,13 +145,14 @@ function getPreviousDate(date) {
     var month=date.month;
     var year=date.year;
     
-    var daysInMonth=[31,28,31,30,31,30,31,31,30,31,30,31];
+    var daysInMonth=[31,31,28,31,30,31,30,31,31,30,31,30,31];
     
     if(month===3){  
         if(isLeapYear(year)){
     if(day<1){
-        day=29;
         month--;
+        day=29;
+        
         
     }
     }
@@ -166,12 +167,14 @@ function getPreviousDate(date) {
     }
         else{
             if(day<1){
-                day=daysInMonth[month-1];
                 month--;
+                day=daysInMonth[month];
+                
             }
         }
     
     if(month<1){
+        
         month=12;
         year--;
     }
@@ -221,9 +224,9 @@ checkButton.addEventListener('click', function eventHandler(){
    console.log()
    outputMessage.innerText=`The next Palindrome Date is ${nextDate.day}-${nextDate.month}-${nextDate.year},You missed the Date by ${nxt} days.`;
 } else {
-    var[ pre , nextDate]= previousPalindromeDate(date);
+    var[ pre , previousDate]= previousPalindromeDate(date);
     console.log()
-    outputMessage.innerText=`The Last Palindrome Date was ${nextDate.day}-${nextDate.month}-${nextDate.year},You missed the Date by ${pre} days.`;
+    outputMessage.innerText=`The Last Palindrome Date was ${previousDate.day}-${previousDate.month}-${previousDate.year},You missed the Date by ${pre} days.`;
 
 }
        }
